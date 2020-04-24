@@ -1,0 +1,35 @@
+.wishItem{
+    background-color: rgb(243, 243, 243);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+}   
+
+.topRow{
+    margin-bottom: -20px;
+}
+
+.titleProd{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: black;
+}   
+.titleProd:hover {
+    color: coral;
+}
+.priceProd{
+    font-size: 18px;
+    font-weight: bold;
+    color: coral;
+}
+
+
+.deleteProd{
+    color: grey;
+}
+.deleteProd:hover{
+    color:  rgb(153, 42, 42);
+}

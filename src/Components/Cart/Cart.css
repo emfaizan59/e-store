@@ -1,0 +1,53 @@
+.stRate
+{
+    display: flex;
+    margin-left: 10px;
+cursor: pointer;
+    padding-right: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+.stRate p{
+    margin-bottom: 5px;
+    padding-left: 10px;
+}
+
+.selected {
+    border: 1px solid rgb(109, 109, 177);
+    border-radius: 10px;
+    
+}
+
+
+
+.butn {
+    padding : 0px
+}
+
+
+.labelQuantity {
+    font-size: 16px;
+    font-weight: 800;
+    margin-right: 10px;
+    padding-top: 10px;
+}
+
+.amount{
+ 
+
+    font-size: 16px;
+    font-weight: 800;
+    margin-top: 10px;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+
+.deletButn{
+    color: grey;
+}
+.deletButn:hover{
+    color:  rgb(153, 42, 42);
+}

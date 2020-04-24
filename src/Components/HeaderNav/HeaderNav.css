@@ -1,0 +1,68 @@
+.headerMain{
+
+}
+
+
+
+.avatarImg{
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: -3px;
+}
+
+
+
+.guestPanel a {
+    margin-top: -10px;
+    margin-left: 10px;
+}
+
+.guestPanel a {
+    margin-left: 0px;
+    text-decoration: none;
+    color: white;
+    border-radius: 10px;
+
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #3F9D9F;
+    margin-right: 10px;
+    padding: 8px;
+
+}
+
+.guestPanel a:hover{
+    color : white ;
+    background-color: #58BF60;
+
+    box-shadow: 1px 1px 7px 1px grey;
+}
+
+
+.cartNum{
+    border-radius: 50%;
+    background-color: rgb(214, 202, 26);
+    padding: 0px 5px 5px 5px;
+    color: white;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 45px;
+    z-index: 1;
+    
+}
+
+.divCart{
+
+}
+
+.dropdownItem{
+    text-align: center;
+    color: black;
+    text-decoration: none;
+    padding: 1px;
+}
+.dropdownItem:hover {
+    color: black;
+}

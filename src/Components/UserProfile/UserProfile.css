@@ -1,0 +1,16 @@
+.sidebarLinks{
+
+    color:  black;
+    text-decoration: none;
+}
+.sidebarLinks:hover {
+    font-weight: bold;
+    color: black;
+}
+
+.activeOption {
+    color: rgb(13, 115, 146);
+    text-decoration: underline;
+    font-weight: bold;
+
+}

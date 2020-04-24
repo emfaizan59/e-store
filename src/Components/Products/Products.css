@@ -1,0 +1,40 @@
+.catLink{
+    text-decoration: none;
+    color: black;
+}
+
+
+.prodCard{
+
+    border: 2px solid black;
+
+}
+.prodTitle{
+    font-size: 16px;
+    padding-left: 10px;
+    margin-bottom: 5px;
+    color: black;
+}
+.prodPrice{
+    padding-left: 10px;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.prodSale {
+    padding-left: 10px;
+    margin-bottom: 40px;
+}
+
+.prodSale strong {
+    text-decoration-line: line-through;
+    color: gray;
+
+}
+.prodRating{
+    position: absolute  ;
+    bottom: 10px;
+    left: 10px;
+    color: gray;
+}
