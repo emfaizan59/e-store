@@ -121,8 +121,8 @@ export default class Products extends Component {
    {arrayList.map((element , i) => (
  <Grid.Column>
  <Card raised link href= {`productid=${element.id}`}>
-    <Image className="prodImage" src={element.Images[0]} wrapped ui={false} />
-   <h5 className="prodTitle">{element.productName}</h5>
+    <Image className="prodImage" src={element.Images[0]}   style={{height: '210px'}} />
+   <h5 className="prodTitle">{element.productName.length > 100 ? `${element.productName.substring(0,45)}...` : element.productName }</h5>
    <p className="prodPrice">RS. {element.Price}</p>  
       <p className="prodSale"><strong>RS. {element.Sale}</strong> -50%</p> 
     

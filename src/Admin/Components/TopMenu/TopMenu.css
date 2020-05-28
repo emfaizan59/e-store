@@ -1,0 +1,13 @@
+.topMenuBar{
+    height: 70px;
+    background-color: #0E1E24;
+    color: white;
+
+}
+
+
+.divTopButton{
+    position: absolute;
+    top: 15px;
+right: 50px;
+}

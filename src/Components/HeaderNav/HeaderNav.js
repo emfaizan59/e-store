@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component , Fragment} from 'react'
 import {Link, Redirect} from 'react-router-dom'
 import { Container, Grid , Image , Input , Button, Segment , Dropdown , Loader , Icon } from 'semantic-ui-react'
 import "./HeaderNav.css"
@@ -38,7 +38,7 @@ export default class HeaderNav extends Component {
     window.location.href = "/"
    }
    componentDidMount = () => {
-     if(token !== null)
+     if(token !== null && token !=="wwVR6fezLGSS39muEbOSz01QA5t1")
      {
 
       firebase.database().ref("users/"+token).on('value', (snapshot) => {
@@ -79,10 +79,6 @@ export default class HeaderNav extends Component {
        <Link to="/">  <Image src='/images/e-store.png' style={{height : '120px' , width : '120px'}} circular floated="right" /></Link>
 
          </Grid.Column>
-
-
-
-
 
          <Grid.Column width={7} verticalAlign="middle">
         <form onSubmit={this.searchForItem} target="/">
@@ -130,10 +126,20 @@ export default class HeaderNav extends Component {
   </Dropdown>
         </div>
          :
+         <Fragment>
+           {token == "wwVR6fezLGSS39muEbOSz01QA5t1" ? 
+           <p>Admin View      <a style={{cursor : 'pointer'}} onClick={this.logOut}>Log Out</a> </p> 
+          
+         
+           :
+
         <div className="guestPanel">
             <a href="/login">Login</a>
           <a href="/register">Register</a>
             </div>
+    }
+</Fragment>
+
 }
     </div>
 }

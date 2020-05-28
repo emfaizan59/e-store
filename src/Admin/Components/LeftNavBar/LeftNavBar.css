@@ -1,0 +1,54 @@
+.leftBar{
+    background-color: #0E1E24;
+    color: white;
+    height: 100vh;
+}
+
+.linkButtons{
+    color: rgba(255, 255, 255, 0.767);
+    font-size: 15px;
+    margin: 10px;
+    padding: 15px 15px 15px 25px;
+    
+    text-align: left;
+}
+
+.ico{
+    color: rgba(255, 255, 255, 0.767);
+}
+
+
+.linkButtons:hover{
+    color: white;
+    background-color: rgba(119, 119, 119, 0.198);
+ 
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.linkButtons:hover .ico{
+    color: white;
+}
+
+
+.activeSection{
+    color: white;
+    background-color: rgba(119, 119, 119, 0.582);
+ 
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+.activeIco {
+    color: white;
+}
+
+
+.dividerTag{
+    text-align: left;
+    padding-left: 20px;
+    font-weight: bolder;
+    margin-bottom: -03px;
+}

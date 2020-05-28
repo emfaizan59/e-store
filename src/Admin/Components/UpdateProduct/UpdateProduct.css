@@ -1,0 +1,16 @@
+.imgPreview{
+
+}
+
+.imgPreview:hover .iconDel{
+    visibility: visible;
+}
+
+
+
+.iconDel{
+    visibility: hidden;
+    position: absolute;
+    left: 135px;
+    top: 0px;
+}

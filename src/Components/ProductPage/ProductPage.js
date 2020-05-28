@@ -1,12 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import HeaderNav from '../HeaderNav/HeaderNav'
 import "./ProductPage.css"
-import {Breadcrumb, Container, Grid, Segment , Image ,Modal ,Header , Rating , Card, Icon, Button , Divider , Placeholder } from 'semantic-ui-react'
+import {Breadcrumb, Container, Grid, Segment , Image ,Modal ,Header , Rating , Card, Icon, Button , Divider , Placeholder, Message } from 'semantic-ui-react'
 import {Link, Redirect} from 'react-router-dom'
 import Viewer from 'react-viewer';
 import firebase from '../../firebase'
 import MyModal from '../Modal/LoginModal'
 import LoginComponent from '../LoginComponent/LoginComponent'
+import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
+
 let prodCart = []
 let a = localStorage.getItem("loginUserToken")
 let arrImgSrc = []
@@ -27,7 +29,8 @@ export default class ProductPage extends Component {
         returnPolicy : '' ,
         Category : '',
         id : '' ,
-        warranty : true ,
+        description : '' ,
+        warranty : 'yes' ,
         productCount : 1 ,
         dataSet : firebase.database().ref('users'),
         prodSet : firebase.database().ref('products') ,
@@ -38,7 +41,7 @@ export default class ProductPage extends Component {
         imageArr : [],
         // modalOpen: false,
         // valueIntoModal: "123456abcdef"
-
+        noProduct : false
 
      }
 
@@ -50,13 +53,19 @@ export default class ProductPage extends Component {
 
     componentDidMount = () => {
         // console.log(localStorage.getItem("loginUserToken"))
-      firebase.database().ref("products/"+this.props.match.params.prodID).on('value', (snapshot) => {
+firebase.database().ref("products/"+this.props.match.params.prodID).on('value', (snapshot) => {
         const userObj = snapshot.val();
-
-       prodCart = {...userObj}
+        console.log(userObj)
+        if(userObj === null )
+        {
+            this.setState({noProduct : true})
+        }
+        else{
+    
+    prodCart = {...userObj}
 
        this.setState({productName : userObj.productName , productRating : userObj.productRating , returnPolicy : userObj.returnPolicy , productReviews : userObj.productReviews ,Price : userObj.Price , Sale : userObj.Sale , Quantity : userObj.Quantity , Category : userObj.Category , id : userObj.id ,
-         load : false  , warranty : userObj.Warranty
+         load : false  , warranty : userObj.Warranty , description : userObj.Description
     })
 
      
@@ -114,7 +123,7 @@ export default class ProductPage extends Component {
         
 
        })
-
+    }
       })
 
       
@@ -131,6 +140,9 @@ if(a == null)
     // window.location.href = "/login"
 
     this.setState({ open: true })
+}
+else if(a == "wwVR6fezLGSS39muEbOSz01QA5t1"){
+    alert("You are in Admin View")
 }
 else{
 
@@ -167,9 +179,7 @@ else{
             console.log(currentCount)
             console.log("Calc .....")
             console.log(currentPrice)
-            this.state.prodSet.child(id).update({
-                Quantity : this.state.Quantity - this.state.productCount
-            })
+          
             this.state.dataSet.child(a+"/cart/"+id).update({
                     title : prodCart.productName,
                     id : prodCart.id ,
@@ -180,6 +190,20 @@ else{
                     totalPrice : currentPrice
 
             })
+
+            this.state.prodSet.child(id+"/cartedItem/"+a).update({
+                title : prodCart.productName,
+                id : prodCart.id ,
+                count : currentCount ,
+                Category : this.state.Category,
+                image1 : arrImgSrc[0].src ,
+                actualPrice : this.state.Price , 
+                totalPrice : currentPrice
+
+        })
+        this.state.prodSet.child(id).update({
+            Quantity : this.state.Quantity - this.state.productCount
+        })
     
             this.setState({productCount : 1})
 
@@ -201,6 +225,9 @@ else{
     // window.location.href = "/login"
 
     this.setState({ open: true })
+}
+else if(a == "wwVR6fezLGSS39muEbOSz01QA5t1"){
+    alert("You are in Admin View")
 }
 else{
 
@@ -237,6 +264,14 @@ else{
   
                 <div>
                 <HeaderNav />
+         
+         <Fragment>
+             {this.state.noProduct ? 
+             <Message negative>
+             <Message.Header>Oops ! No Product Found.</Message.Header>
+             <p>We are Sorry, That product may have been deleted from the store.</p>
+           </Message>
+         :
             <Container>
           
           {this.state.load ? null :
@@ -307,6 +342,7 @@ else{
 </Segment>
 
 :
+<Fragment>
 <Segment clearing>
             <Grid columns={3}>
                 <Grid.Row stretched >
@@ -420,14 +456,14 @@ else{
 
                         </div>
                     </Grid.Column>
-                    <Grid.Column width={4}>
+             <Grid.Column width={4}>
                 <div>
                 <p className="warranty">Return &amp; Warranty</p>
                 <Divider />
                 <p><Icon name="check circle"  color="blue"/> 100% Authentic</p>
                 <p><Icon name="check circle" color="blue" />{this.state.returnPolicy} days easy return.<br/>
                 <span style={{paddingLeft:'20px' , fontSize:'11px' , color : 'grey'}}>Change of mind is not applicable</span></p>
-        <p><Icon name="check circle" color="blue" disabled = {this.state.warranty ? false : true} />{this.state.warranty ? "Warranty available" :"Warranty not available"  } </p>
+        <p><Icon name="check circle" color="blue" disabled = {this.state.warranty == 'yes' ? false : true} />{this.state.warranty == 'yes' ? "Warranty available" :"Warranty not available"  } </p>
                 </div>
 
 
@@ -435,8 +471,21 @@ else{
                 </Grid.Row>
             </Grid>
             </Segment>
+{this.state.description !== '' ?
+         <Segment>
+             <Header as="h3">Product Overview</Header>
+             <div>{ReactHtmlParser(this.state.description)}</div>
+
+
+         </Segment>
+: null }
+            </Fragment>
     }
     </Container>
+   
+}
+   </Fragment>
+  
             </div>
   
         )

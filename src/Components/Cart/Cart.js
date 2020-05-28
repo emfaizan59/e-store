@@ -32,13 +32,13 @@ checkBoxState = (id , totalPrice) => {
      
         this.setState({[id] : true })
      
-        subTotal  = subTotal+ totalPrice
+        subTotal  = subTotal*1+ totalPrice*1
         // console.log(sbt)
     }
     else
     {
         this.setState({[id] : false })
-        subTotal  = subTotal - totalPrice
+        subTotal  = subTotal*1 - totalPrice*1
      
         // console.log(sbt)
 
@@ -65,7 +65,7 @@ delCart = (count , id , totalPrice) => {
           
 
             firebase.database().ref("products/"+id).update({
-                Quantity : prevQuantity + count
+                Quantity : (prevQuantity*1) + count
             })     
         });   
     })
@@ -76,9 +76,10 @@ delCart = (count , id , totalPrice) => {
     })
 
     firebase.database().ref("users/"+uid+"/cart").child(id).remove()
+    firebase.database().ref("products/"+id+"/cartedItem").child(uid).remove()
     // this.setState({array : []})
     if(this.state[id])
-    subTotal = subTotal - totalPrice
+    subTotal = subTotal*1 - totalPrice*1
     this.databaseLoadCart()
 
 
@@ -130,17 +131,23 @@ incProd = (id , count , actPrice) => {
         if(prevQuantity !== 0)
         {
             firebase.database().ref("products/"+id).update({
-                Quantity : prevQuantity-1
+                Quantity : prevQuantity*1 - 1
             })   
-            let updatedCount = count + 1
+            let updatedCount = count*1 + 1
             let actPriceNew = actPrice * updatedCount
                 firebase.database().ref('users').child(uid+"/cart/"+id).update({
                     count : updatedCount ,
                     totalPrice : actPriceNew
                 })
+
+                firebase.database().ref('products').child(id+"/cartedItem/"+uid).update({
+                    count : updatedCount ,
+                    totalPrice : actPriceNew
+                })
+
                 if(this.state[id])
                 {
-                    subTotal = subTotal+actPrice
+                    subTotal = subTotal*1 + actPrice*1
                 }
             this.databaseLoadCart()
         }
@@ -168,6 +175,10 @@ let actPriceNew = actPrice * updatedCount
         count : updatedCount ,
         totalPrice : actPriceNew
     })
+    firebase.database().ref('products').child(id+"/cartedItem/"+uid).update({
+        count : updatedCount ,
+        totalPrice : actPriceNew
+    })
 
     let prevQuantity = 0
     firebase.database().ref("products/"+id).once("value").then((snapshot) => {
@@ -182,7 +193,7 @@ let actPriceNew = actPrice * updatedCount
             
         
             firebase.database().ref("products/"+id).update({
-                Quantity : prevQuantity+1
+                Quantity : prevQuantity*1+1
             })     
         });   
     })
@@ -194,7 +205,7 @@ let actPriceNew = actPrice * updatedCount
 
     if(this.state[id])
     {
-        subTotal = subTotal-actPrice
+        subTotal = subTotal*1 - actPrice*1
     }
 this.databaseLoadCart()
 
@@ -357,7 +368,7 @@ prRate = () => {
                     </Grid.Column>
                     <Grid.Column width={4} >
 
-                <Segment>
+                <Segment clearing>
                     <Header as="h4">Order Summary</Header>
                     <Divider />
                     

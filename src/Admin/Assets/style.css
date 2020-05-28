@@ -1,0 +1,43 @@
+.cardTitle{
+    margin-bottom:0px;
+    padding-top: 10px;
+    color: rgb(128, 128, 128);
+    padding-left: 5px;
+    font-size: 14px;
+    font-weight: bolder;
+}
+
+.cardAmount{
+    padding-bottom: 10px;
+    margin-bottom:0px;
+    padding-left: 5px;
+    margin-top: 3px;
+    font-size: 20px;
+}
+
+.card{
+    border-left:  4px solid rgb(206, 49, 49);
+    border-radius: 5px;
+}
+
+.icoColor{
+    color: rgb(202, 202, 202);
+}
+
+.prodTable{
+
+    margin-top: 50px;
+}
+
+
+.cellAction{
+visibility: hidden;
+    
+}
+.cellAction:hover {
+    visibility: visible;
+}
+
+.elementRow:hover .cellAction{
+    visibility: visible;
+}
